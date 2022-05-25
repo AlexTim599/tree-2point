@@ -3,7 +3,8 @@ import axios from "axios";
 import { buildTree } from "../../utils";
 
 const initialState = {
-  todos: {},
+  todos: [],
+  selectedItem: []
 };
 
 export const getTodos = createAsyncThunk(
@@ -30,6 +31,9 @@ export const todoSlice = createSlice({
     setTodo: (state, action) => {
       state.todos = action.payload;
     },
+    selectTodo: (state, action) => {
+      state.selectedItem = action.payload
+    }
   },
   extraReducers: {
     [getTodos.fulfilled]: () => console.log("fulfilled"),
@@ -37,6 +41,6 @@ export const todoSlice = createSlice({
     [getTodos.rejected]: () => console.log("rejected"),
   },
 });
-export const { setTodo } = todoSlice.actions;
+export const { setTodo, selectTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
